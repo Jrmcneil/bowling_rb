@@ -1,15 +1,15 @@
 class Game
-  attr_accessor :cumulative_score
+  attr_accessor :completed_roles
 
   def initialize
-    @cumulative_score = 0
+    @completed_rolls = []
   end
 
   def roll(pins)
-    @cumulative_score += pins
+    @completed_rolls.push(pins)
   end
 
   def score
-    @cumulative_score
+    @completed_rolls.to_enum.reduce(:+)
   end
 end
