@@ -1,8 +1,15 @@
 class Game
- def roll(pins)
- end
+  attr_accessor :cumulative_score
 
- def score
-   0
- end
+  def initialize
+    @cumulative_score = 0
+  end
+
+  def roll(pins)
+    @cumulative_score += pins
+  end
+
+  def score
+    @cumulative_score
+  end
 end
