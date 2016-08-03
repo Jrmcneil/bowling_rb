@@ -1,5 +1,4 @@
 class Game
-  attr_accessor :completed_roles
 
   def initialize
     @completed_rolls = []
