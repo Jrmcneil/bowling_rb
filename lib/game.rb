@@ -27,8 +27,7 @@ class Game
     Proc.new do |roll, index|
       next_roll, subsequent_roll = @completed_rolls[index + 1, index + 2]
       score = roll + next_roll 
-      score += subsequent_roll if score == 10
-      score
+      score = score == 10 ? score + subsequent_roll : score
     end
   end
 end
