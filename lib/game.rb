@@ -9,19 +9,26 @@ class Game
   end
 
   def score
-    frames = []
-    @completed_rolls.each_with_index do |roll, index| 
-      if index % 2 == 0
-        frame_score = get_frame_score(roll, @completed_rolls[index + 1], @completed_rolls[index + 2])
-        frames.push(frame_score)
-      end
-    end
-    frames.reduce(:+)
+    frame_scores.reduce(:+)
+  end
+  
+  private
+  
+  def frame_scores
+      frame_first_rolls.map(&frame_score) 
+  end
+  
+  def frame_first_rolls
+      @completed_rolls.each_with_index 
+                      .select {|roll, index| index % 2 == 0}
   end
 
-  def get_frame_score(roll, next_roll, subsequent_roll)
-    frame_score = roll + next_roll 
-    frame_score += subsequent_roll if frame_score == 10
-    frame_score
+  def frame_score
+    Proc.new do |roll, index|
+      next_roll, subsequent_roll = @completed_rolls[index + 1, index + 2]
+      score = roll + next_roll 
+      score += subsequent_roll if score == 10
+      score
+    end
   end
 end

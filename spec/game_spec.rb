@@ -9,17 +9,17 @@ RSpec.describe Game do
       roll_same_score(20, 0)
       expect(game.score).to eq(0)
     end
-  end
   
-  it "returns 20 if each roll knocked down 1 pin" do
-    roll_same_score(20, 1)
-    expect(game.score).to eq(20)
-  end
+    it "returns 20 if each roll knocked down 1 pin" do
+      roll_same_score(20, 1)
+      expect(game.score).to eq(20)
+    end
 
-  it "returns 29 if one frame was a spare and the rest downed 1 pin" do
-    roll_spare 
-    roll_same_score(18, 1)
-    expect(game.score).to eq(29)
+    it "returns 29 if one frame was a spare and the rest downed 1 pin" do
+      roll_spare 
+      roll_same_score(18, 1)
+      expect(game.score).to eq(29)
+    end
   end
 
   def roll_same_score(rolls, pins)
