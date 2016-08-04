@@ -17,7 +17,7 @@ class Game
   private
   
   def frame_scores
-      frame_first_rolls[FRAMES_RANGE].map(&frame_score) 
+      first_rolls_of_frames[FRAMES_RANGE].map(&frame_score) 
   end
   
   def frame_score
@@ -28,12 +28,12 @@ class Game
     end
   end
 
-  def frame_first_rolls
+  def first_rolls_of_frames
       @completed_rolls.each_with_index
-                      .select(&identify_first_rolls)
+                      .select(&first_roll_of_frame?)
   end
   
-  def identify_first_rolls
+  def first_roll_of_frame?
     first_roll_is_even = true
     Proc.new do |roll, index|
       if ((index % 2 === 0) === first_roll_is_even)

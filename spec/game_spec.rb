@@ -15,7 +15,7 @@ RSpec.describe Game do
       expect(game.score).to eq(20)
     end
 
-    it "returns 29 if one frame was a spare and the rest downed 1 pin", focus: true do
+    it "returns 29 if one frame was a spare and the rest downed 1 pin" do
       roll_spare 
       roll_same_score(18, 1)
       expect(game.score).to eq(29)
@@ -31,6 +31,11 @@ RSpec.describe Game do
       roll_strike
       roll_same_score(20, 1)
       expect(game.score).to eq(30)
+    end
+
+    it "assigns a perfect score for all strikes" do
+      12.times { roll_strike }
+      expect(game.score).to eq(300)
     end
   end
   
