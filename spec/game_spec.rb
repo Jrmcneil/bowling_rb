@@ -23,6 +23,8 @@ RSpec.describe Game do
     
     it "returns 30 if one frame was a strike and the rest downed 1 pin" do
       roll_same_score(1, 10)
+      roll_same_score(18, 1)
+      expect(game.score).to eq(30)
     end
   end
 
