@@ -22,10 +22,20 @@ RSpec.describe Game do
     end
     
     it "returns 30 if one frame was a strike and the rest downed 1 pin" do
-      roll_same_score(1, 10)
+      roll_strike
       roll_same_score(18, 1)
       expect(game.score).to eq(30)
     end
+
+    it "only counts the first 10 frames towards the score" do
+      roll_strike
+      roll_same_score(20, 1)
+      expect(game.score).to eq(30)
+    end
+  end
+  
+  def roll_strike
+    roll_same_score(1, 10)
   end
 
   def roll_same_score(rolls, pins)

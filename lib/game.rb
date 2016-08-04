@@ -1,4 +1,6 @@
 class Game
+  
+  FRAMES_RANGE = 0..9
 
   def initialize
     @completed_rolls = []
@@ -15,7 +17,7 @@ class Game
   private
   
   def frame_scores
-      frame_first_rolls.map(&frame_score) 
+      frame_first_rolls[FRAMES_RANGE].map(&frame_score) 
   end
   
   def frame_score
