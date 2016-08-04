@@ -18,6 +18,14 @@ class Game
       frame_first_rolls.map(&frame_score) 
   end
   
+  def frame_score
+    Proc.new do |roll, index|
+      next_roll, subsequent_roll = @completed_rolls[index + 1, index + 2]
+      score = roll + next_roll 
+      score = (score == 10) ? score + subsequent_roll : score
+    end
+  end
+
   def frame_first_rolls
       @completed_rolls.each_with_index
                       .select(&identify_first_rolls)
@@ -33,11 +41,4 @@ class Game
     end
   end
 
-  def frame_score
-    Proc.new do |roll, index|
-      next_roll, subsequent_roll = @completed_rolls[index + 1, index + 2]
-      score = roll + next_roll 
-      score = (score == 10) ? score + subsequent_roll : score
-    end
-  end
 end
