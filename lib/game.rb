@@ -19,15 +19,18 @@ class Game
   end
   
   def frame_first_rolls
-      first_roll_is_even = true 
-      frames = []
-      @completed_rolls.each_with_index do |roll, index|
-        if ((index % 2 === 0) === first_roll_is_even)
-          frames << [roll, index]
-          first_roll_is_even = !first_roll_is_even if roll == 10 
-        end
+      @completed_rolls.each_with_index
+                      .select(&identify_first_rolls)
+  end
+  
+  def identify_first_rolls
+    first_roll_is_even = true
+    Proc.new do |roll, index|
+      if ((index % 2 === 0) === first_roll_is_even)
+        first_roll_is_even = !first_roll_is_even if roll == 10 
+        true
       end
-      frames
+    end
   end
 
   def frame_score
